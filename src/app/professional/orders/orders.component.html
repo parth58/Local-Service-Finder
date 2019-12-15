@@ -1,0 +1,61 @@
+<section id="orders" class="bg-light mt-5">
+    <div class="container-fluid pt-4" id="main">
+        <h1 class="text-center text-capitalize ">Completed Orders</h1>
+        <hr class="w-25 mx-auto  pt-3">
+        <div *ngIf="myorders.length>0; else elseBlock">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12"  *ngFor="let o of myorders">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div style="display:inline-block;">
+                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                        class="img img-rounded img-fluid" style="width: 80px;" />
+                                         <p class="text-secondary text-center mt-1 mb-0">{{o.Request_datetime|date:'mediumDate'}}</p>
+                                    <p class="text-secondary text-center">{{o.Request_datetime|date:'shortTime'}}</p>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-9">
+                                <p>
+                                    <a class="float-left" href="#"><strong>User 1</strong></a>
+
+                                </p>
+                                <div class="clearfix"></div>
+
+                                <!-- <h6 class="card-text text-dark">9191349874</h6> -->
+                                <p class="card-text">{{o.Address}}</p>
+                                <h5 class="card-title">{{o.Description}}</h5>
+
+                                <!-- <h5 class="datetime"><span class=" float-center badge badge-warning"> <i
+                                        class="fa fa-clock"></i> 10 AM</span></h5>
+                            <h5 class="datetime"><span class="float-center  badge badge-warning"> <i
+                                        class="fa fa-calendar"></i> 20 Jan, 2019</span></h5> -->
+
+
+                                <span class=" float-center btn text-white btn-warning mr-1"> <i class="fa fa-clock-o"></i>
+                                    {{o.Time|date:'shortTime'}}
+                                </span>
+                                <span class="float-center  btn btn-info"> <i class="fa fa-calendar"></i>
+                                    {{o.Date|date:'mediumDate'}}</span>
+                                    <a  (click)="openchat(o._id)" class="float-right btn btn-success text-white"><strong>View Details</strong> </a>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+        <ng-template #elseBlock>
+                <div class="text-center pb-5">
+                <h5>You have not completed any Order</h5>
+                </div>
+            </ng-template>
+    </div>
+</section>

@@ -1,0 +1,404 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" routerLink="/" style="font-family:Acme;">
+    <img src="../../assets/images/logo2.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+    Home Services
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul id="menulist" class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/contact-us">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about-us">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/how-it-works">How It Works</a>
+      </li> -->
+
+      <li class="nav-item dropdown" *ngIf="ss.isuser">
+        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Services
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" disabled>Our Services</a>
+
+          <div class="dropdown-divider"></div>
+
+          <a class="dropdown-item" *ngFor="let s of servicelist" (click)="onselect(s)">{{s.name}}</a>
+
+        </div>
+      </li>
+
+      <li class="nav-item" *ngIf="ss.isloggedIn && ss.isprof">
+        <a class="nav-link" routerLink="/prof/requests">Requests</a>
+      </li>
+      <li class="nav-item" *ngIf="ss.isloggedIn && ss.isprof">
+        <a class="nav-link" routerLink="/prof/orders">My Orders</a>
+      </li>
+      <li class="nav-item" *ngIf="ss.isloggedIn && ss.isprof">
+        <a class="nav-link" routerLink="/prof/reviews">Reviews</a>
+      </li>
+      <li class="nav-item" *ngIf="ss.isloggedIn && ss.isprof">
+        <a class="nav-link" routerLink="/prof/pending-order">Pending Orders</a>
+      </li>
+
+      <li class="nav-item" *ngIf="ss.isloggedIn && ss.isprof">
+        <a class="nav-link"> Welcome {{ss.prof.FirstName}}</a>
+      </li>
+
+
+      <li class="nav-item" *ngIf="!ss.isloggedIn">
+        <a class="nav-link" routerLink="/prof-login">Become A Proffessional</a>
+      </li>
+
+      <li class="nav-item" *ngIf="!ss.isloggedIn">
+        <a class="nav-link" data-toggle="modal" data-target="#loginModal">Log in</a>
+
+
+      </li>
+      <li class="nav-item" *ngIf="!ss.isloggedIn">
+
+        <a class="nav-link" data-toggle="modal" data-target="#registerModal">Sign Up</a>
+
+      </li>
+
+      <li class="nav-item dropdown" *ngIf="ss.isloggedIn && ss.isuser">
+        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Welcome {{ss.user.FirstName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <!-- <a class="dropdown-item" routerLink="/Profile">Profile</a> -->
+          <a class="dropdown-item" routerLink="/myorders">My Orders</a>
+          <a class="dropdown-item" routerLink="/myrequests">My Requests</a>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="ss.isloggedIn">
+
+        <a class="nav-link btn btn-outline-danger" (click)="logout()">Logout</a>
+
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="error"></div>
+        <form #login="ngForm" (ngSubmit)=loginauth(login.value)>
+
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Email*</label>
+            <div class="col-sm-10">
+              <input type="email" placeholder="Email Address" name="Email" required ngModel class="form-control"
+                #lemail="ngModel" pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'>
+              <div *ngIf="lemail.invalid && (lemail.dirty || lemail.untouched)">
+                <div *ngIf="lemail.errors.required">
+                  <h6>
+                    <p class="text-danger">* Email is required.</p>
+                  </h6>
+
+                </div>
+                <div *ngIf="lemail.errors.pattern">
+                  <h6>
+                    <p class="text-danger">* Email must be in valid form.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Password*</label>
+            <div class="col-sm-10">
+              <input type="password" placeholder="Password" name="Password" required ngModel class="form-control"
+                #lp1="ngModel">
+              <div *ngIf="lp1.invalid && (lp1.dirty || lp1.untouched)">
+                <div *ngIf="lp1.errors.required">
+                  <h6>
+                    <p class="text-danger">* Password is required.</p>
+                  </h6>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary" [disabled]=!this.login.valid>Login</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <div id="#signupbtn" class="mx-5" data-toggle="modal">
+          <!-- <div class="mr-5" data-toggle="modal" data-target="#myModal" data-dismiss="modal"> -->
+
+          <a class="btn-link text-primary" data-toggle="modal" data-target="#registerModal">Create New Account</a>
+        </div>
+        <a href="#" class="btn-link text-primary float-right">forgot Password?</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Sign Up Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-dialog-scrollable">
+      <div class="modal-header">
+        <h5 class="modal-title text-info" id="exampleModalLongTitle">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="rgform" #register=ngForm (ngSubmit)=registerUser(register.value)>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputfName4">First Name</label>
+              <input type="text" placeholder="First Name" name="FirstName" required ngModel class="form-control"
+                #fname="ngModel" minlength="3" maxlength="10" pattern="[a-zA-Z]*">
+              <div *ngIf="fname.invalid && (fname.dirty || fname.untouched)">
+                <div *ngIf="fname.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="fname.errors.pattern">
+                  <h6>
+                    <p class="text-danger">* First Name should contain only characters.</p>
+                  </h6>
+                </div>
+                <div *ngIf="fname.errors.minlength">
+                  <h6>
+                    <p class="text-danger">* First Name must be at least 3 characters.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputlName4">Last Name</label>
+              <input type="text" placeholder="Last Name" name="LastName" required ngModel class="form-control"
+                #lname="ngModel" minlength="3" pattern="[a-zA-Z]*">
+              <div *ngIf="lname.invalid && (lname.dirty || lname.untouched)">
+                <div *ngIf="lname.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="lname.errors.pattern">
+                  <h6>
+                    <p class="text-danger">* Last Name should contain only characters.</p>
+                  </h6>
+                </div>
+                <div *ngIf="lname.errors.minlength">
+                  <h6>
+                    <p class="text-danger">* LastName must be at least 3 characters.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group ">
+            <label for="inputEmail4">Email</label>
+            <input type="email" placeholder="Email Address" name="Email" required ngModel class="form-control"
+              #email="ngModel" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+            <div *ngIf="email.invalid && (email.dirty || email.untouched)">
+              <div *ngIf="email.errors.required">
+
+                <h6>
+                  <p class="text-danger">* required.</p>
+                </h6>
+              </div>
+              <div *ngIf="email.errors.pattern">
+                <h6>
+                  <p class="text-danger">* Email must be in valid form.</p>
+                </h6>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" placeholder="Area, LandMark" required name="Address1" ngModel
+              #add1="ngModel">
+            <div *ngIf="add1.invalid && (add1.dirty || add1.untouched)">
+              <div *ngIf="add1.errors.required">
+                <h6>
+                  <p class="text-danger">* required.</p>
+                </h6>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Address 2</label>
+            <input type="text" class="form-control" placeholder="Apartment, Building or floor" required name="Address2"
+              ngModel #add2="ngModel">
+            <div *ngIf="add2.invalid && (add2.dirty || add2.untouched)">
+              <div *ngIf="add2.errors.required">
+                <h6>
+                  <p class="text-danger">* required.</p>
+                </h6>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label for="inputContactNo">Contact No</label>
+              <input type="text" placeholder="Phone Number" name="PhoneNo" required class="form-control" ngModel
+                #contact="ngModel" pattern="^\d{10}$" minlength="10" maxlength="10">
+              <div *ngIf="contact.invalid && (contact.dirty || contact.untouched)">
+                <div *ngIf="contact.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="contact.errors.minlength">
+                  <h6>
+                    <p class="text-danger">* Contact Number must contain 10 Digits. </p>
+                  </h6>
+                </div>
+                <div *ngIf="contact.errors.pattern">
+                  <h6>
+                    <p class="text-danger">* Contact should contain only Digits.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputCity">City</label>
+              <select class="form-control" id="inputCity" required name="City" #city="ngModel" ngModel>
+                <option selected disabled>Choose City...</option>
+                <option>Nadiad</option>
+                <option>Anand</option>
+              </select>
+              <div *ngIf="city.invalid && (city.dirty || city.untouched)">
+                <div *ngIf="city.errors.required">
+                  <h6>
+                    <p class="text-danger">* Please Choose City</p>
+                  </h6>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="form-group col-md-3">
+              <label for="inputZip">Zip</label>
+              <input type="text" class="form-control" required ngModel name="Zip" #zip="ngModel" pattern="^\d{6}$"
+                maxlength="6">
+              <div *ngIf="zip.invalid && (zip.dirty || zip.untouched)">
+                <div *ngIf="zip.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="zip.errors.maxlength">
+                  <h6>
+                    <p class="text-danger">* Zip Number must contain 6 Digits. </p>
+                  </h6>
+                </div>
+                <div *ngIf="zip.errors.pattern">
+                  <h6>
+                    <p class="text-danger">* Zip Number should contain only Digits.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Password</label>
+              <input type="password" placeholder="Password" name="Password" required ngModel class="form-control"
+                #p1="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$">
+              <div *ngIf="p1.invalid && (p1.dirty || p1.untouched)">
+                <div *ngIf="p1.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="p1.errors.pattern">
+                  <h6>
+                    <p class="text-danger">*Must Contains At least 8 characters, &nbsp;
+                      one Lowercase letter,&nbsp;
+                      one Uppercase letters,&nbsp;
+                      one Numbers,&nbsp;
+                      one Special characters.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputCPassword4"> Confirm Password</label>
+              <input type="password" placeholder="Re-Enter Password" name="Confirm_Password" required ngModel
+                class="form-control" #p2="ngModel" pattern="{{p1.value}}">
+              <div *ngIf="p2.invalid && (p2.dirty || p2.touched)">
+                <div *ngIf="p2.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="p2.errors.pattern">
+                  <h6>
+                    <p class="text-danger">* Password must be same as above.</p>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]=!this.register.valid>Sign in</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+          </div>
+        </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div id="header">
+
+    
+    <div id="demo" class="carousel slide" data-ride="carousel">
+     
+      <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+      </ul>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="imgoverlay"> </div>
+          <img src="../../../assets/images/young-man-working-with-wires-switcher_23-2147743118.jpg" width="100%" height="500">
+          <div class="carousel-caption" >
+            <h1>Home Services</h1>
+            <p class="h4">Get instant access to reliable and affordable services.</p>
+            <button class="btn btn-lg  btn-primary" routerLink="/how-it-works">Learn More</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+            <div class="imgoverlay"> </div>
+          <img src="../../../assets/images/antonika-chanel-RJCslxmvBcs-unsplash.jpg" width="100%" height="500">
+          <div class="carousel-caption">
+
+            <h1>Don't Worry</h1>
+            <p class="h4">Risk Free Repair And Relocation.</p>
+            <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#registerModal" *ngIf="!isLoggedin">Sign Up</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+            <div class="imgoverlay"> </div>
+          <img src="../../../assets/images/annie-gray-WEWTGkPUVT0-unsplash.jpg" width="100%" height="500">
+          <div class="carousel-caption text-center">
+            <h2>Certified Proffessionals</h2>
+            <p class="h4">The Easy and reliable way to take care of your home.</p>
+            <form autocomplete="off" action="home.html">
+
+              <div class="form-group row ">
+
+                <div class="col-sm-6 mx-auto autocomplete">
+
+                  <input type="text" placeholder="Search For a Service.." id="mysearch" class="form-control">
+
+                </div>
+              </div>
+
+            </form>
+            <span>Eg. Salon at Home, Plumber,Electrician</span>
+          </div>
+        </div>
+      </div>
+   
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+    </div>
+
+</div>

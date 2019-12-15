@@ -1,0 +1,52 @@
+<section id="requests" class="bg-light mt-5">
+    <div class="container pt-4">
+        <h1 class="text-center text-capitalize">Reviews</h1>
+        <hr class="w-25 mx-auto pt-3">
+        <div *ngIf="reviewlist.Review.length>0; else elseBlock">
+        <div class="row">
+            <div class="col-md-6 col-12" *ngFor="let r of reviewlist.Review">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div style="display:inline-block;">
+                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                        class="img img-rounded img-fluid" style="width: 80px;" />
+                                    <p class="text-secondary text-center mt-1 mb-0">{{r.Timestamp|date:'mediumDate'}}</p>
+                                    <p class="text-secondary text-center">{{r.Timestamp|date:'shortTime'}}</p>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="border-bottom pb-3">
+                                <p>
+                                    <span class="float-left h3"
+                                        ><strong>{{r.User}}</strong></span>
+                                   
+                                        <span class="float-right"><i class="text-warning fa fa-star"></i> &nbsp;{{r.Stars|number:"1.1-1"}}</span>
+                                   
+
+
+                                </p>
+                            </div>
+                                <h5 class=" border-bottom pb-1">Review</h5>
+                                <div class="clearfix"></div>
+                                <p>{{r.Review_msg}}</p>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+        </div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="text-center pb-5">
+                <h5>No Reviews Available</h5>
+            </div>
+        </ng-template>
+    </div>
+</section>

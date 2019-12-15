@@ -1,0 +1,298 @@
+<!-- <div class="col-lg-8 col-md-8 col-12"> -->
+<div *ngIf='proflist.length>0; else noprofblock'>
+    <h1 class="text-center mb-4 p-3 bg-light">{{sname}}</h1>
+  <div class="container-fluid" *ngFor="let p of proflist">
+   
+    <div class="row">
+      <div class="col-12">
+
+
+        <div class="media border rounded p-3 mb-3">
+
+          <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="media-object mr-3" style="width:80px" />
+          <div class="media-body">
+            <h5 class=" media-heading">{{p.FirstName}} &nbsp;{{p.LastName}}- <span
+                class="text-muted h6">{{p.Email}}</span>
+            </h5>
+            <span class="float-right">
+              <button href="#" class="btn btn-primary btn-sm"
+                (click)="setprof(p)">
+                Book Now</button>
+            </span>
+
+            <p class="text-secondary">{{p.Address}}</p>
+            <!-- <div class="mb-5">
+                            <h5 class="mr-2"><i class="text-warning fa fa-star"></i><strong> 5.0</strong> (50 Reviews)
+                            </h5>
+                            Hired 101 times On Home Services
+                        </div> -->
+            <div class="mb-5">
+              <h5 class="mr-2">Experience-{{p.Experience}} &nbsp;Years
+              </h5>
+
+            </div>
+            <hr class="bg-dark">
+            <div *ngIf='p.Review.length>0; else elseBlock'>
+
+              <div class="media" *ngFor="let c of p.Review">
+
+                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="media-object mr-3" style="width:45px" />
+
+                <div class="media-body">
+                  <h5 class=" media-heading mr-2">{{c.User}}</h5>
+
+                  <p class="text-muted">{{c.Timestamp|date:'short'}}</p>
+                  <div class="text-muted">
+                    <h5 class="pr-5">Review-
+                      <span class="text-dark mr-3">
+                        <i class="text-warning fa fa-star mr-2"></i>
+                        <strong>{{c.Stars| number:'1.1-1'}}</strong>
+                      </span>
+                    </h5>
+                  </div>
+                  <div>
+                    <p> {{c.Review_msg}}</p>
+                    <hr class="bg-muted">
+                  </div>
+
+                </div>
+               
+              </div>
+              
+            </div>
+            <ng-template #elseBlock>
+              <div>
+                <h5>Sorry! No Reviews Available</h5>
+              </div>
+            </ng-template>
+
+
+            <!-- <div class="text-center my-3">
+                            <button class="btn btn-outline-info">Read More</button>
+                        </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #noprofblock>
+    <div class="container mt-1 text-center">
+  <h4 class="mx-3">
+    Sorry! No Professional is available for this Service
+  </h4>
+      <img src="assets/images/404.jpg" class="img-fluid rounded mx-auto d-block" >
+
+    </div>
+  
+</ng-template>
+
+<!-- </div> -->
+
+
+<form id="orderform" #order=ngForm (ngSubmit)=placeOrder(order.value)>
+
+  <div class="modal fade" id="chooseworkModal" tabindex="-1" role="dialog" aria-labelledby="chooseworkModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"> Send Request</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <textarea class="form-control" placeholder="Please Give Description Of Work" rows="3" required name="Description" ngModel
+              #desc="ngModel"></textarea>
+
+            <div *ngIf="desc.invalid && (desc.dirty || desc.untouched)">
+              <div *ngIf="desc.errors.required">
+                <h6>
+                  <p class="text-danger">* required.</p>
+                </h6>
+              </div>
+
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="Budget" required ngModel name="Budget"
+              #budget="ngModel" />
+
+          </div>
+
+          <div *ngIf="budget.invalid && (budget.dirty || budget.untouched)">
+            <div *ngIf="budget.errors.required">
+              <h6>
+                <p class="text-danger">* required.</p>
+              </h6>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn btn-dark text-white" data-toggle="modal" data-target="#chooseDateModal" data-dismiss="modal">
+              Next
+            </a>
+            <!-- <button type="button" class="btn btn-dark">Next</button> -->
+            <a class="btn btn-secondary text-white " data-dismiss="modal">Close</a>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="chooseDateModal" tabindex="-1" role="dialog" aria-labelledby="chooseDateModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Send Request</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+
+
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="date" class="form-control" placeholder="Select Date" required
+                  min="{{date | date:'yyyy-MM-dd'}}" ngModel name="Date" #datein="ngModel">
+
+
+                <div class="input-group-append">
+
+                  <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+                </div>
+
+              </div>
+              <div *ngIf="datein.invalid &&( datein.dirty || datein.untouched)">
+                <div *ngIf="datein.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="datein.errors.min">
+                  <h6>
+                    <p class="text-danger">* We Serve between 9AM to 9PM</p>
+                  </h6>
+                </div>
+                <div *ngIf="datein.errors.max">
+                  <h6>
+                    <p class="text-danger">* We Serve between 9AM to 9PM</p>
+                  </h6>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="time" value="09:00" class="form-control" min="09:00" max="21:00" required
+                  placeholder="Select Time" ngModel name="Time" #time="ngModel">
+
+
+                <div class="input-group-append">
+                  <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span>
+                </div>
+              </div>
+              <div *ngIf="time.invalid && (time.dirty || time.untouched)">
+                <div *ngIf="time.errors.required">
+                  <h6>
+                    <p class="text-danger">* required.</p>
+                  </h6>
+                </div>
+                <div *ngIf="time.errors.min">
+                  <h6>
+                    <p class="text-danger">* We Serve between 9AM to 9PM</p>
+                  </h6>
+                </div>
+                <div *ngIf="time.errors.max">
+                  <h6>
+                    <p class="text-danger">* We Serve between 9AM to 9PM</p>
+                  </h6>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-secondary text-white" (click)="secondback()">Back</a>
+          <a class="btn btn-dark text-white" data-toggle="modal" data-target="#chooseAddressModal" data-dismiss="modal">
+            Next
+          </a>
+          <!-- <button type="button" class="btn btn-dark">Next</button> -->
+          <a class="btn btn-secondary text-white" data-dismiss="modal">Close</a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="chooseAddressModal" tabindex="-1" role="dialog" aria-labelledby="chooseworkModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Request Work</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+
+
+
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <textarea type="text" value="{{address}}" class="form-control" placeholder="Address" ngModel name="Address" required
+                  #addr="ngModel"></textarea>
+                
+              </div>
+              <div *ngIf="addr.invalid && (addr.dirty || addr.untouched)">
+                  <div *ngIf="addr.errors.required">
+                    <h6>
+                      <p class="text-danger">* required.</p>
+                    </h6>
+                  </div>
+
+                </div>
+
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-secondary text-white" (click)="lastback()">Back</a>
+            <button type="submit" class="btn btn-dark" [disabled]=!this.order.valid>
+              Confirm Request
+            </button>
+            <!-- <button type="button" class="btn btn-dark">Next</button> -->
+            <a class="btn btn-secondary text-white" data-dismiss="modal" target="chooseAddressModal">Close</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

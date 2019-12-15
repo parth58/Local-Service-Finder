@@ -1,1 +1,234 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+
+    font-family:'Bree Serif','Josefin Sans', sans-serif;
+   
+    box-sizing: border-box;
+  }
+  html {
+scroll-behavior: smooth;
+}
+
+
+.dark{
+  background-color: #212529;
+}
+
+  .autocomplete {
+    position: relative;
+    display: inline-block;
+    color:#292b2c ;
+
+  }
+
+  .autocomplete-items {
+    padding: 5px;
+    width: max-content;
+    margin-top: 10px;
+    position: absolute;
+    background-color: #fff;
+    border-top: none;
+    border-radius: 8px;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .autocomplete-items div {
+    padding: 5px;
+  
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+  
+  }
+
+  /*when hovering an item:*/
+  .autocomplete-items div:hover {
+    background-color: #e9e9e9;
+  }
+
+  /*when navigating through the items using the arrow keys:*/
+  .autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+  }
+
+  .services h3 {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .services h3 a {
+    color: #000;
+  }
+
+  .services .icon {
+   width: 95px;
+   height: 95px;
+    border-radius: 50%;
+    display: table;
+    text-align: center;
+    margin: 0 auto;
+  background-color:rgba(0, 0, 0, 0.04);
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  @media screen and (max-width: 992px) {
+    .services .icon {
+      margin: 0 auto 30px auto;
+    }
+  }
+  @media screen and (max-width: 430px) {
+    
+    .services .icon {
+    width:72px;
+    height: 75px;
+    }
+    .services .icon img {
+     width:50px;
+     height: 50px;
+    }
+    .carousel-inner img {
+      height: auto;
+    }
+  
+  }
+  .services .icon:hover{
+    background-color:#2D6CDF;
+  }
+  .services .icon img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    padding-top: 15px;
+    color: #000;
+
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+  }
+
+  #contactUs a:link{
+    text-decoration: none !important;
+
+  }
+  #contactUs a:hover{
+    text-decoration: none !important;
+
+  }
+ 
+  .rcenter{
+   
+    margin: auto  !important;
+    width: 100%;;
+  }
+  .textWhite {
+    color: white !important;
+  }
+
+  .carousel-inner img {
+    /* width: 100%; */
+    height: 80vh;
+  
+  z-index:-1 !important;
+  }
+
+  
+
+  #header{
+    position: relative;
+  }
+.imgoverlay{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 1;
+height:100%;
+background-color: rgba(54, 53, 53, 0.7);
+}
+.carousel-caption {
+  position: absolute !important;
+    top: 50%;
+    transform: translateY(-25%);
+    text-align: center;
+   
+  }
+
+  .carousel-caption h1 h2{
+    text-shadow: 1px 1px 2px black;
+    text-transform: uppercase;
+    font-weight: 200 !important;
+    z-index: 2;
+
+
+  }
+
+  .carousel-caption p {
+    text-shadow: 1px 1px 2px black;
+    text-transform: uppercase;
+    font-weight: 100 !important;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+     z-index: 2;
+
+
+  }
+   .img-box {
+  width: 135px;
+  height: 135px;
+  margin: 0 auto;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+ .img-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+}
+ 
+
+  /* .fa-facebook {
+
+    color: #3b5998 !important;
+
+  }
+
+  .fa-twitter {
+    color: #55acee !important;
+  }
+
+  .fa-linkedin {
+    color: #0976b4 !important;
+  }
+
+  .fa-instagram {
+    border-radius: 0.5rem;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  } */
+
+  .bg-transparnt {
+    background: transparent;
+  }
+  #loader{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+   
+    z-index: 100;
+  }
+
+  
+
+
+
+
+  

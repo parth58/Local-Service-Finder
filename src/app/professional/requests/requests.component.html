@@ -1,0 +1,122 @@
+<section id="orders" class="bg-light mt-5">
+    <div class="container-fluid pt-4" id="main">
+        <h1 class="text-center text-capitalize ">Requested Orders</h1>
+        <hr class="w-25 mx-auto  pt-3">
+        <div *ngIf="myorders.length>0; else elseBlock">
+            <div class="row">
+                <!-- <div class="col-lg-6 col-md-6 col-12"  *ngFor="let o of myorders">
+                    <div class="card my-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div style="display:inline-block;">
+                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                            class="img img-rounded img-fluid" style="width: 80px;" />
+                                        <p class="text-secondary text-center mt-1 mb-0">{{o.Request_datetime|date:'mediumDate'}}</p>
+                                        <p class="text-secondary text-center">{{o.Request_datetime|date:'shortTime'}}</p>
+                                    </div>
+    
+                                </div>
+                                <div class="col-lg-9">
+                                    <p>
+                                        <a class="float-left" href="#"><strong>User 1</strong></a>
+    
+                                    </p>
+                                    <div class="clearfix"></div>
+    
+                                    <p class="card-text">{{o.Address}}</p>
+                                    <h5 class="card-title">{{o.Description}}</h5>
+    
+                                    
+    
+    
+                                    <span class=" float-center btn text-white btn-warning "> <i class="fa fa-clock-o"></i>
+                                        {{o.Time|date:'shortTime'}}
+                                    </span>
+                                    <span class="float-center  btn btn-info"> <i class="fa fa-calendar"></i>
+                                        {{o.Date|date:'mediumDate'}}</span>
+                                         
+                                    
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-lg-6 col-12" *ngFor="let o of myorders">
+
+                    <div class="card my-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                        class="img img-rounded img-fluid" style="width:100%;">
+                                    <p class="text-secondary text-center mt-1 mb-0">
+                                        {{o.Request_datetime|date:'mediumDate'}}</p>
+                                    <p class="text-secondary text-center">{{o.Request_datetime|date:'shortTime'}}</p>
+
+                                </div>
+                                <div class=" col-md-9 col-12">
+                                   
+                                        <h1><a class="float-left"><strong>{{o.User.name}}</strong>
+                                                <!-- <small class="text-dark">February 19,2016</small> -->
+                                            </a></h1>
+
+                                    
+                                    <div class="clearfix"></div>
+
+                                    <!-- <h6 class="card-text text-dark"><strong>{{}}</strong> </h6> -->
+                                    <p class="card-text">
+                                        Address-
+                                        <span>
+                                            <address>
+                                                {{o.Address}}
+                                            </address>
+                                        </span>
+                                    </p>
+
+
+                                    <h5 class="card-title">{{o.Description}}</h5>
+                                    <h3>Budget <span class="badge badge-info ">{{o.Budget|currency:'INR'}}</span></h3>
+                                    <!-- <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                                                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a> -->
+
+                                    <h5 class="datetime"><span class=" float-center badge badge-warning "> <i
+                                                class="fa fa-clock"></i> {{o.Time|date:'shortTime'}}</span></h5>
+                                    <h5 class="datetime"><span class="float-center  badge badge-warning"> <i
+                                                class="fa fa-calendar"></i> {{o.Date|date:'mediumDate'}}</span></h5>
+
+                                    <!-- <a href="#" class="badge badge-success btn btn-lg">Approve!</a>
+                                                                    <a href="#" class="badge badge-danger btn btn-lg">Reject!</a> -->
+                                    <a (click)="openchat(o._id)" class="float-right btn text-white btn-primary mx-1"><i
+                                            class="far fa-comments"></i> Chat </a>
+
+                                    <a (click)="reject(o._id)" class="float-right btn text-white btn-danger mx-1"><i class="fa fa-times"></i>
+                                        Reject </a>
+                                    <a  (click)="approve(o._id)" class="float-right btn text-white btn-success"><i class="fa fa-check"></i>
+                                        Approve</a>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <!-- klh.afdfhksgfdsklgndghgfmj -->
+
+                </div>
+
+
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="text-center pb-5">
+                <h5>No Request Orders Available</h5>
+            </div>
+        </ng-template>
+    </div>
+</section>

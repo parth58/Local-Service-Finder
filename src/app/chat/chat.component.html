@@ -1,0 +1,144 @@
+<section id="chat">
+    <div class="container">
+<!-- 
+        <div *ngIf="isuser; else profname">
+        <h1 class="text-center text-capitalize mt-3 ">{{order.User.FirstName}}&nbsp;{{order.User.LastName}}</h1>
+    </div>
+    <ng-template #profname>
+        <h1 class="text-center text-capitalize mt-3 ">{{order.Professional.FirstName}}&nbsp;{{order.Professional.LastName}}</h1>
+    </ng-template> -->
+    
+        <hr class="w-25 mx-auto mt-3 pt-3">
+
+        <div class="row">
+            <div class="col-lg-5 col-12">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"
+                                    style="width:100%;" />
+
+
+                            </div>
+                            <div class=" col-md-9 col-12">
+                                <p>
+                                    <a class="float-left">
+                                        <div *ngIf="isuser; else profname">
+                                            <h4><strong>{{order.Professional.FirstName}}&nbsp;{{order.Professional.LastName}}</strong>  
+                                            </h4>
+                                            <!-- <a class="float-left ml-1 badge badge-primary">  Status- {{order.Status}}</a> -->
+                                            <h5>Status- <span class="badge badge-success ">{{order.Status}}</span></h5>
+                                            <h5>Estimation- <span class="badge badge-info ">{{order.Estimate|currency:'INR'}}</span></h5>
+                                        </div>
+                                        <ng-template #profname>
+                                            <h4><strong>{{order.User.FirstName}}&nbsp;{{order.User.LastName}}</strong>
+                                            </h4>
+                                            <h5>Status- <span class="badge badge-success ">{{order.Status}}</span></h5>
+                                            <h5>Estimation- <span class="badge badge-info ">{{order.Estimate|currency:'INR'}}</span></h5>
+                                        </ng-template>
+
+                                    </a>
+
+                                </p>
+                                <div class="clearfix"></div>
+
+                                <h6 class="card-text text-dark">
+                                    <strong *ngIf="isuser; else profno">{{order.Professional.PhoneNo}}</strong>
+                                    <ng-template #profno>
+                                        <strong>{{order.User.PhoneNo}}</strong>
+                                    </ng-template>
+                                </h6>
+                                <p class="card-text">
+                                    {{order.Address}}
+                                </p>
+
+                                <h5 class="card-title">{{order.Description}}</h5>
+                                <h3>Budget <span class="badge badge-info ">{{order.Budget|currency:'INR'}}</span></h3>
+
+                                <h5 class="datetime"><span class="float-center badge badge-warning "> <i
+                                            class="fa fa-clock"></i> {{order.Time |date:'shortTime'}}</span></h5>
+                                <h5 class="datetime"><span class="float-center  badge badge-warning"> <i
+                                            class="fa fa-calendar"></i> {{order.Date|date:'mediumDate'}}</span></h5>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-7 col-12">
+
+                <h2 class="mt-3">Conversation</h2>
+                <!-- <h4 class="text-center text-capitalize mt-3 rounded bg-light">Messages User1</h4>
+                            <hr class="w-25 mx-auto  pt-3">      -->
+                <form class="mt-3" *ngIf="!isuser">
+
+
+                    <div class="input-group mb-3" style="width: 250px">
+                        <input type="number" class="form-control" placeholder="Send Estimation" #estm>
+
+                        <!-- <textarea class="form-control" aria-label="With textarea" rows="1   "></textarea> -->
+                        <button [disabled]="isEstmated" class="btn btn-warning border-dark" type="button"
+                            (click)="sendEstimte(estm.value)">Send</button>
+
+
+                    </div>
+
+
+                </form>
+                <div class="media border p-3 mt-3">
+                    <div *ngFor="let c of order.Chat">
+                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" alt="John Doe"
+                            class="mr-3 ml-1 mt-3 rounded-circle" style="width:50px;">
+
+                        <div class="media-body">
+                            <div *ngIf="c.sender_id==userid; else elseBlock">
+                            <div>
+                                <h5>{{c.sender}}</h5>
+                                <p>{{c.timestamp|date:"MM/dd/yyyy h:mma"}}</p>
+                            </div>
+                            <p>{{c.message}}</p>
+                        </div>
+                        <ng-template #elseBlock>
+                                <div class="media pt-3">
+                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" alt="Jane Doe"
+                                            class="mr-3 mt-3 rounded-circle" style="width:45px;">
+                                        <div class="media-body">
+                                            <h5>{{c.sender}}</h5>
+                                            <p>{{c.timestamp|date:"MM/dd/yyyy h:mma"}}</p>
+                                            <p>{{c.message}}</p>
+                                        </div>
+                                    </div>
+                        </ng-template>
+                        
+                            
+                        </div>
+                    </div>
+                </div>
+                <form class="mt-3">
+
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Message" #msg>
+
+                        <!-- <textarea class="form-control" aria-label="With textarea" rows="1   "></textarea> -->
+                        <button [disabled]="isDone" id="sendBtn" class="btn btn-outline-primary" type="button"
+                            (click)="sendMessage(msg.value)">Send</button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</section>

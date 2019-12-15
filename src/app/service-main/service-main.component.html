@@ -1,0 +1,36 @@
+<section class="mt-5 pt-5">
+
+
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+
+      <ul class="list-unstyled components">
+        <h1>Services</h1>
+
+        <li *ngFor="let s of servicelist">
+          <a id="{{s.name}}" (click)="onselect(s)">{{s.name}}</a>
+        </li>
+
+
+
+      </ul>
+
+    </nav>
+
+
+    <div id="content">
+      <button type="button" id="sidebarCollapse" class="btn btn-outline-dark mb-2 ml-3">
+
+        Services
+      </button>
+
+      <!-- <router-outlet></router-outlet> -->
+      <app-prof-reviews></app-prof-reviews>
+
+    </div>
+  </div>
+
+
+</section>
+

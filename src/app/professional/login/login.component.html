@@ -1,0 +1,333 @@
+<div class="container pt-3 mb-3">
+
+
+    <h1 class="text-center text-capitalize mt-5" data-aos="flip-down" data-aos-easing="ease-in-sine">Become A Proffessional</h1>
+    <hr class="w-25 mx-auto">
+    <div class="text-center">
+        <h3 class="mt-5" data-aos="zoom-in" data-aos-easing="ease-in-sine">Welcome</h3>
+        <p class="mt-3">Expand your service business with Home Services!</p>
+    </div>
+    <div class="row">
+        <div class="col-md-3 my-5 text-center">
+
+            
+            <h3 class="mt-3">Already a User!</h3>
+
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#profloginModal">
+                Login
+            </button>
+
+
+        </div>
+        <div class="col-md-9 my-5">
+
+
+            <form id="profrgform" #register=ngForm (ngSubmit)=registerProf(register.value)>
+
+                <div class="row my-3">
+                    <div class="col-12 mb-3">
+                        <h3 class="text-center text-capitalize">Register Your Self</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">First Name</label>
+                            <input type="text" class="form-control" placeholder="First Name *" name="FirstName" required
+                                ngModel class="form-control" #fname="ngModel" minlength="3" maxlength="10"
+                                pattern="[a-zA-Z]*" />
+                            <div *ngIf="fname.invalid && (fname.dirty || fname.untouched)">
+                                <div *ngIf="fname.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="fname.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">* First Name should contain only characters.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="fname.errors.minlength">
+                                    <h6>
+                                        <p class="text-danger">* First Name must be at least 3 characters.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Last Name *" name="LastName" required
+                                ngModel class="form-control" #lname="ngModel" minlength="3" pattern="[a-zA-Z]*" />
+                            <div *ngIf="lname.invalid && (lname.dirty || lname.untouched)">
+                                <div *ngIf="lname.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="lname.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">* Last Name should contain only characters.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="lname.errors.minlength">
+                                    <h6>
+                                        <p class="text-danger">* LastName must be at least 3 characters.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Password</label>
+                            <input type="password" class="form-control" placeholder="Password *" name="Password"
+                                required ngModel class="form-control" #p1="ngModel"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$" />
+                            <div *ngIf="p1.invalid && (p1.dirty || p1.untouched)">
+                                <div *ngIf="p1.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="p1.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">*Must Contains At least 8 characters, &nbsp;
+                                            one Lowercase letter,&nbsp;
+                                            one Uppercase letters,&nbsp;
+                                            one Numbers,&nbsp;
+                                            one Special characters.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="Confirm Password *"
+                                name="Confirm_Password" required ngModel class="form-control" #p2="ngModel"
+                                pattern="{{p1.value}}" />
+                            <div *ngIf="p2.invalid && (p2.dirty || p2.touched)">
+                                <div *ngIf="p2.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="p2.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">* Password must be same as above.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="inputCity">Gender</label>
+                            <select class="form-control" required name="Gender" #gender="ngModel" ngModel>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                            <div *ngIf="gender.invalid && (gender.dirty || gender.untouched)">
+                                <div *ngIf="gender.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* Please Select the Gender</p>
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" placeholder="Email Address" name="Email" required ngModel
+                                class="form-control" #email="ngModel"
+                                pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+                            <div *ngIf="email.invalid && (email.dirty || email.untouched)">
+                                <div *ngIf="email.errors.required">
+
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="email.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">* Email must be in valid form.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Contact No.</label>
+                            <input type="text" placeholder="Phone Number" name="PhoneNo" required class="form-control"
+                                ngModel #contact="ngModel" pattern="^\d{10}$" minlength="10" maxlength="10">
+                            <div *ngIf="contact.invalid && (contact.dirty || contact.untouched)">
+                                <div *ngIf="contact.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="contact.errors.minlength">
+                                    <h6>
+                                        <p class="text-danger">* Contact Number must contain 10 Digits. </p>
+                                    </h6>
+                                </div>
+                                <div *ngIf="contact.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">* Contact should contain only Digits.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Service Category</label>
+                            <select class="form-control" name="Service" #service="ngModel" ngModel required>
+                                <option disabled>Please select your Service Category</option>
+                                
+                                <option *ngFor="let s of servicelist">{{s.name}}</option>
+                            </select>
+                            <div *ngIf="service.invalid && (service.dirty || service.untouched)">
+                                <div *ngIf="service.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* Please Choose Service</p>
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Profile Picture</label>
+                            <div class="custom-file">
+
+                                <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                <label class="custom-file-label" for="inputGroupFile01">Upload Your Photo </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" name="txtEmpPhone" class="form-control" placeholder="Experience"
+                                ngModel #experience="ngModel" name="Experience" required />
+                            <div *ngIf="experience.invalid && (experience.dirty || experience.untouched)">
+                                <div *ngIf="experience.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* Required</p>
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Address</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required
+                                name="Address" ngModel #add1="ngModel"></textarea>
+
+                            <div *ngIf="add1.invalid && (add1.dirty || add1.untouched)">
+                                <div *ngIf="add1.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* required.</p>
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center mt-5">
+                        <button class="btn btn-primary" [disabled]=!this.register.valid>Register</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="profloginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Professional Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="error"></div>
+                <form #login="ngForm" (ngSubmit)=profloginauth(login.value)>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email*</label>
+                        <div class="col-sm-10">
+                            <input type="email" placeholder="Email Address" name="Email" required ngModel
+                                class="form-control" #lemail="ngModel"
+                                pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'>
+                            <div *ngIf="lemail.invalid && (lemail.dirty || lemail.untouched)">
+                                <div *ngIf="lemail.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* Email is required.</p>
+                                    </h6>
+
+                                </div>
+                                <div *ngIf="lemail.errors.pattern">
+                                    <h6>
+                                        <p class="text-danger">* Email must be in valid form.</p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Password*</label>
+                        <div class="col-sm-10">
+                            <input type="password" placeholder="Password" name="Password" required ngModel
+                                class="form-control" #lp1="ngModel">
+                            <div *ngIf="lp1.invalid && (lp1.dirty || lp1.untouched)">
+                                <div *ngIf="lp1.errors.required">
+                                    <h6>
+                                        <p class="text-danger">* Password is required.</p>
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                <label class="form-check-label" for="gridCheck1">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary"   [disabled]=!this.login.valid>Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <div id="#signupbtn" class="mx-5" data-toggle="modal" data-target="#exampleModalCenter">
+                    <!-- <div class="mr-5" data-toggle="modal" data-target="#myModal" data-dismiss="modal"> -->
+
+                    <a href="" class="btn-link text-primary">Create New Account</a>
+                </div>
+                <a href="#" class="btn-link text-primary float-right">forgot Password?</a>
+            </div>
+        </div>
+    </div>
+</div>

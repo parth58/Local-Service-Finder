@@ -1,0 +1,68 @@
+<div id="carouselExampleControls" class="carousel slide p-3 border-bottom" data-ride="carousel" data-interval="false">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="row p-2">
+        <div class="col-md-2 col-4 text-center" *ngFor="let s of servicelist.slice(0,6)">
+            <div class="services" data-aos="flip-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
+              <span class="icon shadow">
+                  <a routerLink="/service/{{s.name}}">
+                <img src="{{s.icon}}" height="50px" width="70px">
+                </a>
+              </span>
+              <!-- <div class="desc">
+                <a href="#">{{s.name}}</a>
+              </div> -->
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item mx-0">
+      <div class="row p-2">
+        <div class="col-md-2 col-4 text-center mx-0" *ngFor="let s of servicelist.slice(6,12)">
+         
+          <div class="services" data-aos="flip-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
+            <span class="icon shadow" >
+            <a routerLink="/service/{{s.name}}">
+              <img src="{{s.icon}}" height="50px" width="70px">
+            </a>
+            </span>
+            <!-- <div class="desc">
+              <a href="#">{{s.name}}</a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+
+  <a class="carousel-control left carousel-control-prev" href="#carouselExampleControls" data-slide="prev">
+    <i class="fa fa-angle-left"></i>
+  </a>
+  <a class="carousel-control right carousel-control-next" href="#carouselExampleControls" data-slide="next">
+    <i class="fa fa-angle-right"></i>
+  </a>
+</div>
+
+
+
+  <section id="ourservices" class=" bg-light">
+    <div class="container p-5 ">
+
+        <h1 class="text-center text-capitalize" data-aos="flip-down" data-aos-easing="ease-in-sine">Our Services</h1>
+        <hr class="w-25 mx-auto">
+       
+        <div class="row">
+            <div class="col-md-4 col-12 text-center" *ngFor="let cat of servicelist">
+
+                <div class="card m-3 border-0 shadow-lg">
+                    <img class="card-img-top" src="{{cat.banner}}" alt="Card image" width="300px" height="200px">
+                    <div class="card-body border">
+                    <h5 class="card-title"><a class="text-dark text-decoration-none" routerLink="/service/{{cat.name}}">{{cat.name}}</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
