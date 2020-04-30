@@ -24,7 +24,7 @@
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mongoose": "^5.7.5",
     "ngx-slick-carousel": "^0.4.6",
     "nodemailer": "^6.3.1",
